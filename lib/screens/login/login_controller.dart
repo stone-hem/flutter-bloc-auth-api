@@ -16,8 +16,6 @@ class LoginController {
   const LoginController({required this.context});
 
   Future<void> doLogin(String type) async {
-    var getContext = Navigator.of(context);
-
     try {
       if (type == "email") {
         final state = context.read<LoginBloc>().state;
@@ -25,10 +23,16 @@ class LoginController {
         String password = state.password;
 
         if (email.isEmpty) {
-          showMotionToastError(context: context, subject: "Missing Information!", title: 'Error');
+          showMotionToastError(
+              context: context,
+              subject: "Missing Information!",
+              title: 'Error');
         }
         if (password.isEmpty) {
-          showMotionToastError(context: context, subject: "Missing Information!", title: 'Error');
+          showMotionToastError(
+              context: context,
+              subject: "Missing Information!",
+              title: 'Error');
         }
 
         User user = User(email: state.email, password: state.password);
@@ -44,13 +48,25 @@ class LoginController {
               .setString(AppConstants.userProfileKey, jsonEncode(data['user']));
           Global.strorageService
               .setString(AppConstants.userTokenKey, data['token']);
-              showMotionToastSuccess(context: context, subject: "login succesfull!", title: 'success');
-          getContext.pushNamedAndRemoveUntil(RouteNames.app, (route) => false);
-        }else{
-        showMotionToastError(context: context, subject: "${response.reasonPhrase}", title: 'Error');
+          if (context.mounted) {
+            showMotionToastSuccess(
+                context: context,
+                subject: "login succesfull!",
+                title: 'success');
+            Navigator.of(context)
+                .pushNamedAndRemoveUntil(RouteNames.app, (route) => false);
+          }
+        } else {
+          if (context.mounted) {
+            showMotionToastError(
+                context: context,
+                subject: "${response.reasonPhrase}",
+                title: 'Error');
+          }
         }
       } else {
-        showMotionToastError(context: context, subject: "Unexpected Error!", title: 'Error');
+        showMotionToastError(
+            context: context, subject: "Unexpected Error!", title: 'Error');
       }
     } catch (e) {
       rethrow;

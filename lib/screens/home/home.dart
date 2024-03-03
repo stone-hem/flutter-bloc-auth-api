@@ -83,14 +83,15 @@ class _HomeScreenState extends State<HomeScreen> {
               const SizedBox(
                 height: 10,
               ),
-              ListView.builder(
+              state.noteItem.isEmpty?const Text('loaidng..'):ListView.builder(
                 shrinkWrap: true,
-                itemCount: 10,
+                itemCount: state.noteItem.length,
                 physics: const NeverScrollableScrollPhysics(),
                 itemBuilder: ((context, index) {
                   return ListTile(
                     leading: const Icon(Icons.leaderboard),
-                    title: Text("item $index"),
+                    title: Text("item ${state.noteItem[index].title}"),
+                    subtitle: Text("item ${state.noteItem[index].content}"),
                   );
                 }),
               ),

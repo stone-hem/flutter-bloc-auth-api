@@ -39,9 +39,13 @@ class RegisterController {
           headers: {"content-type": "application/json"},
           body: jsonEncode(user));
       if (response.statusCode == 200) {
-        Navigator.of(context).pop();
+        if (context.mounted) {
+          Navigator.of(context).pop();
+        }
       } else {
-        showMotionToastError(context: context, subject: "Unexpected Error!", title: 'Error');
+        if (context.mounted) {
+          showMotionToastError(context: context, subject: "Unexpected Error!", title: 'Error');
+        }
       }
     } catch (e) {
       debugPrint(e.toString());

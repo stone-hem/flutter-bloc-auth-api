@@ -5,6 +5,8 @@ import 'package:onboarding/common/routes/routes.dart';
 import 'package:onboarding/global.dart';
 import 'package:onboarding/screens/app/bloc/app_blocs.dart';
 import 'package:onboarding/screens/app/bloc/app_events.dart';
+import 'package:onboarding/screens/home/bloc/home_bloc.dart';
+import 'package:onboarding/screens/home/bloc/home_events.dart';
 import 'package:onboarding/screens/profile/settings/bloc/settings_blocs.dart';
 import 'package:onboarding/screens/profile/settings/bloc/settings_states.dart';
 
@@ -18,6 +20,7 @@ class SettingScreen extends StatefulWidget {
 class _SettingScreenState extends State<SettingScreen> {
   void _doLogout() {
     context.read<AppBlocs>().add(const TriggerBottomBarEvent(0));
+    context.read<HomeBlocs>().add(const HomeSliderEvent(0));
     Global.strorageService.remove(AppConstants.userTokenKey);
     Global.strorageService.remove(AppConstants.userProfileKey);
     Navigator.pushNamedAndRemoveUntil(
