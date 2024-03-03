@@ -12,7 +12,7 @@ dependencies:
   dots_indicator: ^3.0.0
   flutter_bloc:
   http:
-  fluttertoast: ^8.2.4
+  motion_toast: ^2.8.0
   shared_preferences: ^2.2.2
   
 dev_dependencies:

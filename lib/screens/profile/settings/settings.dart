@@ -19,6 +19,7 @@ class _SettingScreenState extends State<SettingScreen> {
   void _doLogout() {
     context.read<AppBlocs>().add(const TriggerBottomBarEvent(0));
     Global.strorageService.remove(AppConstants.userTokenKey);
+    Global.strorageService.remove(AppConstants.userProfileKey);
     Navigator.pushNamedAndRemoveUntil(
         context, RouteNames.login, (route) => false);
   }

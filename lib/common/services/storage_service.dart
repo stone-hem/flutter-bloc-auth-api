@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:onboarding/common/constants/constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -19,7 +21,7 @@ class StrorageService {
     return await _preferences.setString(key, value);
   }
 
-   Future<bool> setInt(String key, int value) async {
+  Future<bool> setInt(String key, int value) async {
     return await _preferences.setInt(key, value);
   }
 
@@ -35,5 +37,16 @@ class StrorageService {
 
   Future<bool> remove(String key) {
     return _preferences.remove(key);
+  }
+
+  getUserProfile() {
+    var userProfile = _preferences.get(AppConstants.userProfileKey);
+    if (userProfile != null) {
+      return jsonDecode(userProfile.toString());
+    }
+  }
+
+  String getUserToken() {
+    return _preferences.getString(AppConstants.userTokenKey)??"";
   }
 }
