@@ -7,6 +7,7 @@ import 'package:onboarding/common/constants/constants.dart';
 import 'package:onboarding/common/routes/names.dart';
 import 'package:onboarding/common/widgets/pop_up_toast.dart';
 import 'package:onboarding/global.dart';
+import 'package:onboarding/screens/home/home_controller.dart';
 import 'package:onboarding/screens/login/bloc/login_blocs.dart';
 import 'package:onboarding/screens/login/model/login_model.dart';
 
@@ -55,6 +56,7 @@ class LoginController {
                 title: 'success');
             Navigator.of(context)
                 .pushNamedAndRemoveUntil(RouteNames.app, (route) => false);
+                await HomeController(context: context).init();
           }
         } else {
           if (context.mounted) {

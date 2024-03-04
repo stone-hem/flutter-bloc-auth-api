@@ -8,6 +8,8 @@ import 'package:onboarding/screens/home/bloc/home_bloc.dart';
 import 'package:onboarding/screens/home/home.dart';
 import 'package:onboarding/screens/login/bloc/login_blocs.dart';
 import 'package:onboarding/screens/login/login.dart';
+import 'package:onboarding/screens/note/bloc/note_blocs.dart';
+import 'package:onboarding/screens/note/note.dart';
 import 'package:onboarding/screens/profile/settings/bloc/settings_blocs.dart';
 import 'package:onboarding/screens/profile/settings/settings.dart';
 import 'package:onboarding/screens/register/bloc/register_blocs.dart';
@@ -59,6 +61,13 @@ class AppPages {
         page: const SettingScreen(),
         bloc: BlocProvider(
           create: (_) => SettingsBlocs(),
+        ),
+      ),
+      PageEntity(
+        route: RouteNames.note,
+        page: const NoteScreen(),
+        bloc: BlocProvider(
+          create: (_) => NoteBloc(),
         ),
       ),
     ];
