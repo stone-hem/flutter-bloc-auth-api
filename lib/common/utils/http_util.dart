@@ -10,6 +10,14 @@ class HttpUtil {
     return _processResponse(response);
   }
 
+  static Future<Map<String, dynamic>> getSingle(String url) async {
+    final response = await http.get(Uri.parse(url), headers: _getHeaders());
+    if (response.statusCode==200) {
+      return jsonDecode(response.body);
+    }
+    return {'error':true} as Map<String,dynamic>;
+  }
+
   static Future<List<dynamic>> post(String url, dynamic body) async {
     final response = await http.post(Uri.parse(url),
         headers: _getHeaders(), body: jsonEncode(body));
